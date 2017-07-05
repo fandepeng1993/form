@@ -29,7 +29,7 @@ angular.module('controller',['ngSanitize','mgcrea.ngStrap','gridster'])
           $scope.widthes=650+'px';
           $scope.topes=53+'px';
           $scope.otherread=true;
-
+          $scope.isInEdit=true;
 
            //添加列
            $scope.form_editRow=function(a,inx,c){
@@ -273,6 +273,7 @@ angular.module('controller',['ngSanitize','mgcrea.ngStrap','gridster'])
                    isActive:false,
                    readonly:false,
                    type_text:'',
+                   itemvalue:'',
                    type_placeholder:'大写金额',
                    required:false,
                    Dplaceh:'',
@@ -483,6 +484,14 @@ angular.module('controller',['ngSanitize','mgcrea.ngStrap','gridster'])
                $(e.target).toggleClass('checked');
            };
            $scope.standardItems = [];
+           $scope.isLoading=false;
+           $scope.$watch('standardItems.length',function(newVale,oldValue,scope){
+               console.log($scope.isInEdit);
+               if(newVale!=oldValue){
+                   $scope.isInEdit=true;
+                   console.log($scope.isInEdit);
+               }
+           })
 
        });
     })

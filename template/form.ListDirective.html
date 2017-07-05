@@ -80,7 +80,7 @@
     <!--大写金额表单控件-->
     <!--网址表单控件-->
     <div class="element-content element-wbg-amount clearfix"  ng-if="item.type | isInArray:['amount','url']">
-        <input type="text"  class="element-tag form_grid_input ng-pristine ng-valid ng-touched" placeholder="{{item.Dplaceh}}">
+        <input type="text"  class="element-tag form_grid_input ng-pristine ng-valid ng-touched" placeholder="{{item.Dplaceh}}" ng-model="item.itemvalue" ng-model-options="{debounce:1000}">
     </div>
 
     <!--单选框表单控件-->

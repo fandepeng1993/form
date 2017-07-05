@@ -53,7 +53,7 @@
 
 </head>
 <body ng-app="app" ng-controller="controllers" >
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0;">
     <ul class="form_title_ul">
         <li class="active">表单设置</li>
         <li>未定义</li>
@@ -61,7 +61,7 @@
     </ul>
 </nav>
 <!-- 内容模块 -->
-<div class="form_content">
+<div class="form_content" ng-if="!isLoading">
     <!-- 左边 -->
     <div class="form_content_l">
         <!-- 类型选择 -->
@@ -86,7 +86,7 @@
             </div>
             <!-- 内容表格 -->
             <div class="form_content_l_content_c">
-                <div class="container"  >
+                <div >
                     <div class="form_table ">
                         <div class="form_table_in mCustomScrollbar" data-mcs-theme="dark" data-mcs-axis="x">
                             <!--style="height: 362px;"-->
@@ -119,7 +119,6 @@
                                                 </div>
                                             </div>
                                         </td>
-
                                     </tr>
                                     <tr class="xrow" ng-repeat="n in xrow track by $index" ng-cloak>
                                         <td class="rulerx dropright">
@@ -132,15 +131,12 @@
                                                         data-template-url="template/form.row.dropdown.tpl.html"
                                                         data-container="body" data-auto-close="1" bs-popover>
                                                 </button>
-
                                             </div>
                                             <i ng-click="form_editColumn(1,$index,1)" title="添加行" class="icon_rulder_add add_row" ng-if="!xrow[$index+1]"></i>
                                         </td>
                                         <td ng-repeat="z in n.cols track by $index"></td>
                                     </tr>
-
                                 </table>
-
                                 <div gridster='gridsterConfiguration'
                                      ng-style="{top:data.approvalType=='reimburse'?'53px':'0px',
                         width:((gridsterConfiguration.columns)*200)+1+'px'}" class="clearfix">
@@ -153,13 +149,13 @@
                                             <my-directivelist>
                                                 <!--selectedstate="selectedstate" item="item" states="states"-->
                                             </my-directivelist>
+                                            <p>{{item.itemvalue}}</p>
                                         </li>
                                     </ul>
                                 </div>
-
-
                             </div>
                         </div>
+
 
                         <div class="dropdown ">
                             <button style="margin-top: 100px" class="form_btn blue form_btn_add_element dropdown-toggle"  data-toggle="dropdown">
@@ -177,7 +173,7 @@
                         </div>
                         <div class="apl-yl-area">
                             <div class="text-center">
-                                <button class="form_btn blue">
+                                <button class="form_btn blue " ng-class="{true:'disabled'}[!isInEdit]" ng-click="isInEdit=false">
                                     <i class=" iconfont icon-zhengque"></i>
                                     保存表单
                                 </button>
@@ -193,27 +189,6 @@
                                     <i class="iconfont icon-yan"></i>
                                    预览模式
                                 </button>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                <!--<button type="button" class="btn btn-lg btn-danger" data-animation="am-fade-and-slide-top" data-template-url="modal/docs/modal.demo.tpl.html" bs-modal="modal">Custom Modal-->
-                                    <!--<br>-->
-                                    <!--<small>(using data-template)</small>-->
-                                <!--</button>-->
                             </div>
                         </div>
                     </div>
@@ -234,6 +209,9 @@
             </my-directive>
         </div>
     </div>
+</div>
+<div class="page_loading" ng-if="isLoading">
+
 </div>
 
 <!-- 右边栏弹出 -->
